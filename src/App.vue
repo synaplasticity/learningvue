@@ -1,19 +1,42 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <HelloWorld/> -->
+    <task>asdasd</task>
+    <task>asdasd</task>
   </div>
 </template>
 
+// <script>
+
+// export default {
+  //   name: 'app',
+//   components: {
+  //     ToDo
+//   }
+// }
+// </script>
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import ToDo from './components/ToDo.vue'
 
 export default {
-  name: 'app',
+  // name: 'app',
+  // components: {
+  //   HelloWorld
+  // },
+  name: 'todo',
   components: {
-    HelloWorld
+    ToDo
   }
 }
+
+// export default {
+//   name: 'todo',
+//   components: {
+//     ToDo
+//   }
+// }
 </script>
 
 <style>
