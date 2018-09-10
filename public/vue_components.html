@@ -14,13 +14,18 @@
         <h2 class="subtitle is-2">Tasks</h3>
         <task-list></task-list>
         <hr/>
+
         <p>
         <h2 class="subtitle is-2">Messages</h3>
+        </p>
         <div id="root" class="container">
             <task-message title="Message component" body="Lorem ipsum dolar sit met."></task-message>
             <task-message title="More messages" body="Etc etc etc."></task-message>
         </div>
-        </p>
+
+        <h2 class="subtitle is-2">Modals</h2>
+        <button class="button is-dark" @click="showModal = true">Show modal</button>
+        <modal msg="Some modal!" v-if="showModal" @close="showModal = false"></modal>
     </div>
 
     
