@@ -26,6 +26,20 @@
         <h2 class="subtitle is-2">Modals</h2>
         <button class="button is-dark" @click="showModal = true">Show modal</button>
         <modal msg="Some modal!" v-if="showModal" @close="showModal = false"></modal>
+        <hr/>
+
+        <h2 class="subtitle is-2">Tabs</h2>
+        <tabs>
+            <tab name="About One" :selected=true>
+                <h3>About one...</h3>
+            </tab>
+            <tab name="About Two">
+                <h3>About two...</h3>
+            </tab>
+            <tab name="About Three">
+                <h3>About three...</h3>
+            </tab>
+        </tabs>
     </div>
 
     

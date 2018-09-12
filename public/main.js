@@ -1,5 +1,7 @@
 'use strict'
 
+'use strict'
+
 Vue.component('task-list', {
     template:   `<div>
                 <h2 class="subtitle is-4">All tasks</h2>
@@ -62,7 +64,65 @@ Vue.component('modal', {
                 <button class="modal-close is-large" aria-label="close" @click="$emit('close')"></button>
             </div>
     `
-})
+});
+
+Vue.component('tabs', {
+    template: `
+        <div class="box">
+            <div class="tabs">
+            <ul>
+                <li v-for="tab in tabs" :class="{ 'is-active': tab.isActive }"> 
+                    <a :href="tab.href" @click="selectTab(tab)"> {{ tab.name }} </a>
+                </li>
+            </ul>
+            </div>
+            <div class="tab-details">
+                <slot></slot>
+            </div>
+        </div>
+    `,
+
+    data() {
+        return { tabs: [] }
+    },
+    created() {
+        // $vm0.$children.forEach(tab => console.log(tab.name))
+        console.log(this.$children)
+        this.tabs = this.$children
+    },
+
+    methods: {
+        selectTab(selectedTab) {
+            this.tabs.forEach(tab => {
+                tab.isActive = (tab.name == selectedTab.name)                
+            });
+        }
+    }
+});
+
+Vue.component('tab', { 
+    props: { 
+        name:  {required: true},
+        selected: { default: false} // Assume false if not provided
+    },
+    template: `
+        <div v-show="isActive"><slot></slot></div>
+    `,
+    data() {
+        return {
+            isActive: false
+        }
+    },
+    mounted() {
+        this.isActive = this.selected
+    },
+    computed: {
+        href() {
+            return '#' + this.name.toLowerCase().replace(/ /g, '-')
+        }
+    }
+});
+
 new Vue({
     el: '#root',
     data: {
