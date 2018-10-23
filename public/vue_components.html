@@ -27,7 +27,7 @@
         <button class="button is-dark" @click="showModal = true">Show modal</button>
         <modal msg="Some modal!" v-if="showModal" @close="showModal = false"></modal>
         <hr/>
-
+        
         <h2 class="subtitle is-2">Tabs</h2>
         <tabs>
             <tab name="About One" :selected=true>
@@ -40,6 +40,13 @@
                 <h3>About three...</h3>
             </tab>
         </tabs>
+        <hr/>
+
+        <h2 class="subtitle is-2">Component communication</h2>
+        <h4 class="subtitle is-4">Parent-child communication</h4>
+        <coupon v-on:applied="onCouponApplied"> </coupon>
+        <hr/>
+        
     </div>
 
     

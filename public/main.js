@@ -1,7 +1,5 @@
 'use strict'
 
-'use strict'
-
 Vue.component('task-list', {
     template:   `<div>
                 <h2 class="subtitle is-4">All tasks</h2>
@@ -123,9 +121,26 @@ Vue.component('tab', {
     }
 });
 
+Vue.component('coupon', {
+    template: '<input name="code" placeholer="Enter coupon code" @blur="onCouponApplied">',
+
+    methods: {
+        onCouponApplied() {
+            this.$emit('applied', this.code)
+            // alert('Applied!')
+        }
+    }
+    
+})
+
 new Vue({
     el: '#root',
     data: {
         showModal: false
+    },
+    methods: {
+        onCouponApplied(){
+            alert('Coupon was applied.')
+        }
     }
 });
