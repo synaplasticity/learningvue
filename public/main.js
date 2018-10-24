@@ -136,17 +136,56 @@ Vue.component('coupon', {
     
 })
 
+// Parent-child component communication
+Vue.component('coupon', {
+    template: `<div>
+                Coupon : <input name="code" placeholer="Enter coupon code" @blur="onCouponApplied">
+                </div>`,
+
+    methods: {
+        onCouponApplied() {
+            // The child component (coupon) broadcasts event
+            this.$emit('applied', {code: this.code})
+            // alert('Applied!')
+        }
+    }
+    
+})
+
+// Inter component communcation
+window.Event = new Vue() // Shared event instance
+
+Vue.component('discount', {
+    template: `<div>
+                Discount : <input name="amt" placeholer="Enter discount amount" @blur="onDiscountApplied">
+                </div>`,
+
+    methods: {
+        onDiscountApplied() {
+            // The component (discount) broadcasts event
+            Event.$emit('disApplied', {amt: this.amt})
+        }
+    }
+    
+})
+
+
 new Vue({
     el: '#root',
     data: {
         showModal: false,
-        couponApplied: false
+        couponApplied: false,
+        discountApplied: false
+    },
+    created() {
+        // React to the the disApplied event raised by any event
+        Event.$on('disApplied', () => alert('Discount has been applied'))
     },
     methods: {
-        // The parent responds to the even raised by the chhild component (coupon)
+        // The parent responds to the event raised by the chhild component (coupon)
         onCouponApplied(){
             this.couponApplied = true
-            alert('Coupon was applied.')
+            //alert('Coupon was applied.')
         }
     }
 });
