@@ -122,10 +122,13 @@ Vue.component('tab', {
 });
 
 Vue.component('coupon', {
-    template: '<input name="code" placeholer="Enter coupon code" @blur="onCouponApplied">',
+    template: `<div>
+                <input name="code" placeholer="Enter coupon code" @blur="onCouponApplied">
+                </div>`,
 
     methods: {
         onCouponApplied() {
+            // The child component (coupon) broadcasts event
             this.$emit('applied', this.code)
             // alert('Applied!')
         }
@@ -136,10 +139,13 @@ Vue.component('coupon', {
 new Vue({
     el: '#root',
     data: {
-        showModal: false
+        showModal: false,
+        couponApplied: false
     },
     methods: {
+        // The parent responds to the even raised by the chhild component (coupon)
         onCouponApplied(){
+            this.couponApplied = true
             alert('Coupon was applied.')
         }
     }
