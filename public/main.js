@@ -154,6 +154,21 @@ Vue.component('coupon', {
 
 // Inter component communcation
 window.Event = new Vue() // Shared event instance
+// One could also encapuslate this in a class. E.g.:
+// window.Event = new class{
+
+//     constructor() {
+//         this.vue = new Vue()
+//     }
+
+//     fire(event, data=null) {
+//         this.vue.$emit(event, data)
+//     }
+
+//     listen(event, callback) {
+//         this.vue.$on(event, callback)
+//     }
+// }
 
 Vue.component('discount', {
     template: `<div>
@@ -164,6 +179,7 @@ Vue.component('discount', {
         onDiscountApplied() {
             // The component (discount) broadcasts event
             Event.$emit('disApplied', {amt: this.amt})
+            // Event.fire('disApplied', {amt: this.amt})
         }
     }
     
@@ -180,6 +196,7 @@ new Vue({
     created() {
         // React to the the disApplied event raised by any event
         Event.$on('disApplied', () => alert('Discount has been applied'))
+        // Event.listen('disApplied', () => alert('Discount has been applied'))
     },
     methods: {
         // The parent responds to the event raised by the chhild component (coupon)
